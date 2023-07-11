@@ -12,6 +12,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 signal toggle_inventory()
 
 @onready var camera: Camera3D = $Camera3D
+@onready var ray_cast_3d = $Camera3D/RayCast3D
  
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
