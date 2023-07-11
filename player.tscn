@@ -20,7 +20,7 @@ shape = SubResource("BoxShape3D_4nqff")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35068, 4.03019)
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+[node name="InteractRay" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34975, -4.03329)
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 4
