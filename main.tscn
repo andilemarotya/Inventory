@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjlw3ibaxa7l6"]
+[gd_scene load_steps=19 format=3 uid="uid://cjlw3ibaxa7l6"]
 
 [ext_resource type="PackedScene" uid="uid://dlbw5x5kr4xjm" path="res://player.tscn" id="1_lvtj5"]
-[ext_resource type="Script" path="res://main.gd" id="1_rj6l7"]
+[ext_resource type="Script" path="res://main.gd" id="1_wkut7"]
 [ext_resource type="PackedScene" uid="uid://72omrt7y2gkq" path="res://inventory/inventory.tscn" id="2_ftv5k"]
 [ext_resource type="Script" path="res://inventory/inventory_interface.gd" id="3_d12va"]
 [ext_resource type="PackedScene" uid="uid://cxlsoa8b3tm34" path="res://slot.tscn" id="5_c6phm"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://pick_up/pick_up.tscn" id="7_wliex"]
 [ext_resource type="Resource" uid="uid://2b8hpl83orj6" path="res://item/items/blue_book.tres" id="8_ixq20"]
 [ext_resource type="Script" path="res://inventory/slot_data.gd" id="9_ecuj1"]
+[ext_resource type="PackedScene" uid="uid://dj5knkcvws72d" path="res://GameManager/GameManager.tscn" id="10_dgqw5"]
+[ext_resource type="Script" path="res://scripts/Count.gd" id="11_5jsie"]
+[ext_resource type="Script" path="res://scripts/Progress_Bar.gd" id="11_nqofw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12ay"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,7 +38,9 @@ item_data = ExtResource("8_ixq20")
 quantity = 1
 
 [node name="main" type="Node"]
-script = ExtResource("1_rj6l7")
+script = ExtResource("1_wkut7")
+
+[node name="GameManager" parent="." instance=ExtResource("10_dgqw5")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ksurq")
@@ -55,32 +60,70 @@ shape = SubResource("ConcavePolygonShape3D_q1f1g")
 [node name="Player" parent="." instance=ExtResource("1_lvtj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515994, 0)
 
-[node name="UI" type="CanvasLayer" parent="Player"]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="InventoryInterface" type="Control" parent="Player/UI"]
+[node name="InventoryInterface" type="Control" parent="UI"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 71.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_d12va")
 
-[node name="PlayerInventory" parent="Player/UI/InventoryInterface" instance=ExtResource("2_ftv5k")]
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("2_ftv5k")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="GrabbedSlot" parent="Player/UI/InventoryInterface" instance=ExtResource("5_c6phm")]
-visible = false
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("5_c6phm")]
 modulate = Color(1, 1, 1, 0.509804)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -585.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 398.0
+offset_bottom = 57.0
+script = ExtResource("11_nqofw")
+
+[node name="Label" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.811632
+anchor_top = 0.0123457
+anchor_right = 0.898438
+anchor_bottom = 0.0771605
+theme_override_font_sizes/font_size = 28
+text = "Items ="
+metadata/_edit_use_anchors_ = true
+
+[node name="Count" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.909722
+anchor_top = 0.0185185
+anchor_right = 0.934028
+anchor_bottom = 0.0771605
+theme_override_font_sizes/font_size = 25
+text = "Q"
+script = ExtResource("11_5jsie")
+metadata/_edit_use_anchors_ = true
 
 [node name="Chest" parent="." instance=ExtResource("6_108t1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)

@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 @export var inventory_data: InventoryData
 
+#Player's health
+@export var playerHealth = 50
+@export var maxHealth = 100
+
  
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -20,9 +24,9 @@ func _ready() -> void:
  
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * .005)
-		camera.rotate_x(-event.relative.y * .005)
-		camera.rotation.x = clamp(camera.rotation.x, -PI/4, PI/4)
+		rotate_y(deg_to_rad(-event.relative.x*.05))
+		camera.rotate_x(deg_to_rad(-event.relative.y*.05))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-30), deg_to_rad(20))
  
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
