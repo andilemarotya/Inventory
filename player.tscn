@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlbw5x5kr4xjm"]
+[gd_scene load_steps=5 format=3 uid="uid://dlbw5x5kr4xjm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_52ugg"]
 [ext_resource type="Resource" uid="uid://nk10vhcm8ne7" path="res://test_inv.tres" id="2_qb0bc"]
-[ext_resource type="PackedScene" uid="uid://dj5knkcvws72d" path="res://GameManager/GameManager.tscn" id="3_uqdjc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jkle4"]
 
@@ -40,5 +39,3 @@ offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="GameManager" parent="." instance=ExtResource("3_uqdjc")]

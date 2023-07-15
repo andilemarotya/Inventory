@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://72omrt7y2gkq"]
+[gd_scene load_steps=2 format=3 uid="uid://72omrt7y2gkq"]
 
 [ext_resource type="Script" path="res://inventory/inventory.gd" id="1_iytjp"]
-[ext_resource type="PackedScene" uid="uid://dj5knkcvws72d" path="res://GameManager/GameManager.tscn" id="2_w68vk"]
 
 [node name="Inventory" type="PanelContainer"]
 offset_right = 40.0
@@ -18,7 +17,3 @@ theme_override_constants/margin_bottom = 8
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
 columns = 6
-
-[node name="GameManager" parent="." instance=ExtResource("2_w68vk")]
-
-[connection signal="inventory_item_count_updated" from="." to="GameManager" method="_on_inventory_item_count_updated"]

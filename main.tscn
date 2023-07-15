@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cjlw3ibaxa7l6"]
+[gd_scene load_steps=20 format=3 uid="uid://cjlw3ibaxa7l6"]
 
 [ext_resource type="PackedScene" uid="uid://dlbw5x5kr4xjm" path="res://player.tscn" id="1_lvtj5"]
 [ext_resource type="Script" path="res://main.gd" id="1_wkut7"]
@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://pick_up/pick_up.tscn" id="7_wliex"]
 [ext_resource type="Resource" uid="uid://2b8hpl83orj6" path="res://item/items/blue_book.tres" id="8_ixq20"]
 [ext_resource type="Script" path="res://inventory/slot_data.gd" id="9_ecuj1"]
-[ext_resource type="PackedScene" uid="uid://dj5knkcvws72d" path="res://GameManager/GameManager.tscn" id="10_dgqw5"]
 [ext_resource type="Script" path="res://scripts/Count.gd" id="11_5jsie"]
 [ext_resource type="Script" path="res://scripts/Progress_Bar.gd" id="11_nqofw"]
+[ext_resource type="PackedScene" uid="uid://dw1hju54jpa02" path="res://scenes/Enemy.tscn" id="12_2027q"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="13_yxj8l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12ay"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,11 +27,11 @@ sky = SubResource("Sky_yo8h1")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0tgw5"]
-size = Vector2(50, 50)
+[sub_resource type="BoxMesh" id="BoxMesh_30men"]
+size = Vector3(200, 1, 200)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q1f1g"]
-data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fu5f"]
+size = Vector3(200, 1, 200)
 
 [sub_resource type="Resource" id="Resource_1kktk"]
 script = ExtResource("9_ecuj1")
@@ -40,8 +41,6 @@ quantity = 1
 [node name="main" type="Node"]
 script = ExtResource("1_wkut7")
 
-[node name="GameManager" parent="." instance=ExtResource("10_dgqw5")]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ksurq")
 
@@ -49,13 +48,14 @@ environment = SubResource("Environment_ksurq")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 16.7987, -10.0402)
 shadow_enabled = true
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_0tgw5")
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50427, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_30men")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_q1f1g")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_3fu5f")
 
 [node name="Player" parent="." instance=ExtResource("1_lvtj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515994, 0)
@@ -73,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_d12va")
 
-[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("2_ftv5k")]
+[node name="PlayerInventory" parent="UI/InventoryInterface" groups=["playerInv"] instance=ExtResource("2_ftv5k")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -113,7 +113,7 @@ theme_override_font_sizes/font_size = 28
 text = "Items ="
 metadata/_edit_use_anchors_ = true
 
-[node name="Count" type="Label" parent="UI/HUD"]
+[node name="Count" type="Label" parent="UI/HUD" groups=["CountItems"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.909722
@@ -131,3 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)
 [node name="PickUp" parent="." instance=ExtResource("7_wliex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 2.59508)
 slot_data = SubResource("Resource_1kktk")
+
+[node name="Enemy" parent="." groups=["Enemy"] instance=ExtResource("12_2027q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96294, 1.01996, -5.62144)
+script = ExtResource("13_yxj8l")
