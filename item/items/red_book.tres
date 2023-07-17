@@ -10,6 +10,6 @@ region = Rect2(32, 416, 32, 32)
 [resource]
 script = ExtResource("1_tyeas")
 name = "Red Book"
-description = "Good reading"
+description = "Science Book"
 stackable = false
 texture = SubResource("AtlasTexture_6l5hj")

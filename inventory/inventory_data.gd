@@ -51,9 +51,13 @@ func pick_up_slot_data(slot_data: SlotData):
 			inventory_updated.emit(self)
 			return true
 	
+	
 	for index in slot_datas.size():
-		if slot_datas[index] == slot_data:
-			return false
+		#
+		if slot_datas[index] :
+			if slot_data.item_data == slot_datas[index].item_data :
+				return false
+		
 		elif not slot_datas[index]:
 			slot_datas[index] = slot_data
 			inventory_updated.emit(self)

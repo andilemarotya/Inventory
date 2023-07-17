@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cjlw3ibaxa7l6"]
+[gd_scene load_steps=28 format=3 uid="uid://cjlw3ibaxa7l6"]
 
 [ext_resource type="PackedScene" uid="uid://dlbw5x5kr4xjm" path="res://player.tscn" id="1_lvtj5"]
 [ext_resource type="Script" path="res://main.gd" id="1_wkut7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cxlsoa8b3tm34" path="res://slot.tscn" id="5_c6phm"]
 [ext_resource type="PackedScene" uid="uid://syi3bdr5jxsm" path="res://interactable/chest.tscn" id="6_108t1"]
 [ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://pick_up/red_apple.tscn" id="7_wliex"]
+[ext_resource type="Resource" uid="uid://2b8hpl83orj6" path="res://item/items/blue_book.tres" id="8_ixq20"]
 [ext_resource type="Script" path="res://inventory/slot_data.gd" id="9_ecuj1"]
 [ext_resource type="Resource" uid="uid://bhqx5du1pf4s0" path="res://item/items/apple.tres" id="10_o4lmg"]
 [ext_resource type="Resource" uid="uid://dqsbl7tgk72wx" path="res://item/items/red_book.tres" id="10_ybwvl"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://drv6b6ymnuyie" path="res://pick_up/red_book.tscn" id="12_2ccjm"]
 [ext_resource type="PackedScene" uid="uid://dw1hju54jpa02" path="res://scenes/Enemy.tscn" id="12_2027q"]
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="13_yxj8l"]
+[ext_resource type="PackedScene" uid="uid://1ohdblu8rjg0" path="res://pick_up/blue_book.tscn" id="14_0gjf2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12ay"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,7 +42,22 @@ script = ExtResource("9_ecuj1")
 item_data = ExtResource("10_o4lmg")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_qpfmr"]
+[sub_resource type="Resource" id="Resource_mhiki"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_o4lmg")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_kpc80"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_ybwvl")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_7pb57"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("8_ixq20")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_rm0cl"]
 script = ExtResource("9_ecuj1")
 item_data = ExtResource("10_ybwvl")
 quantity = 1
@@ -139,13 +156,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 2.59508)
 slot_data = SubResource("Resource_1kktk")
 
+[node name="Redapple2" parent="." instance=ExtResource("7_wliex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 8.69105)
+slot_data = SubResource("Resource_1kktk")
+
+[node name="Redapple3" parent="." instance=ExtResource("7_wliex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.400129, 5)
+slot_data = SubResource("Resource_mhiki")
+
 [node name="Redbook" parent="." instance=ExtResource("12_2ccjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34939, 5.21625)
-slot_data = SubResource("Resource_qpfmr")
+slot_data = SubResource("Resource_kpc80")
 
 [node name="Redbook2" parent="." instance=ExtResource("12_2ccjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.34939, 5.21625)
-slot_data = SubResource("Resource_qpfmr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43137, 0.34939, 5.21625)
+slot_data = SubResource("Resource_kpc80")
+
+[node name="Bluebook" parent="." instance=ExtResource("14_0gjf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90864, 0.60321, -2.37852)
+slot_data = SubResource("Resource_7pb57")
+
+[node name="Bluebook2" parent="." instance=ExtResource("14_0gjf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51379, 0.421931, 10.4289)
+slot_data = SubResource("Resource_7pb57")
+
+[node name="Redbook3" parent="." instance=ExtResource("12_2ccjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.456818, 11.2947)
+slot_data = SubResource("Resource_rm0cl")
 
 [node name="Enemy" parent="." groups=["Enemy"] instance=ExtResource("12_2027q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96294, 1.01996, -5.62144)
