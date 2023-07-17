@@ -1,6 +1,5 @@
 extends Label
 
-@export var items = 1
 @onready var Player =  $"../../../Player"
 
 

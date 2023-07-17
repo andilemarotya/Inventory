@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_y8opg"]
 radius = 0.381576
 
-[node name="PickUp" type="RigidBody3D"]
+[node name="Redapple" type="RigidBody3D"]
 collision_layer = 0
 script = ExtResource("1_1p3fh")
 
