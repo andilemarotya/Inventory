@@ -10,8 +10,8 @@ func _ready():
 	sprite_3d.texture = slot_data.item_data.texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	rotate_y(delta)
+#func _process(delta):
+#	rotate_y(delta) #OPTIMISATION ISSUES
 
 
 func _on_area_3d_body_entered(body):

@@ -124,6 +124,7 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 398.0
 offset_bottom = 57.0
+show_percentage = false
 script = ExtResource("11_nqofw")
 
 [node name="Label" type="Label" parent="UI/HUD"]
@@ -137,7 +138,7 @@ theme_override_font_sizes/font_size = 28
 text = "Items ="
 metadata/_edit_use_anchors_ = true
 
-[node name="Count" type="Label" parent="UI/HUD" groups=["CountItems"]]
+[node name="Count" type="Label" parent="UI/HUD" node_paths=PackedStringArray("player") groups=["CountItems"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.909722
@@ -147,7 +148,18 @@ anchor_bottom = 0.0771605
 theme_override_font_sizes/font_size = 25
 text = "Q"
 script = ExtResource("11_5jsie")
+player = NodePath("../../../Player")
 metadata/_edit_use_anchors_ = true
+
+[node name="fps" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
 
 [node name="Chest" parent="." instance=ExtResource("6_108t1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)

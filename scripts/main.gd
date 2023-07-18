@@ -10,6 +10,9 @@ func _ready():
 	player.toggle_inventory.connect(toggle_inventory_interface)
 	inventory_interface.set_player_inventory_data(player.inventory_data)
 	
+func _process(_delta):
+	$UI/HUD/fps.text = "fps: %s" % Engine.get_frames_per_second()
+	
 func toggle_inventory_interface():
 	inventory_interface.visible = not inventory_interface.visible
 	
