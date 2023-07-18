@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbbhd7lh3kdl7"]
+
+[ext_resource type="Script" path="res://scripts/pick_up.gd" id="1_1p3fh"]
+[ext_resource type="Texture2D" uid="uid://edyw7pfv388n" path="res://assets/item/item_atlas.tres" id="1_vqpbm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y8opg"]
+radius = 0.381576
+
+[node name="Redapple" type="RigidBody3D"]
+collision_layer = 0
+script = ExtResource("1_1p3fh")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_vqpbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_y8opg")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_y8opg")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

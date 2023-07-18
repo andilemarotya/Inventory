@@ -2,7 +2,7 @@ extends PanelContainer
 
 signal inventory_item_count_updated(item_count: int)
 
-const Slot = preload("res://slot.tscn")
+const Slot = preload("res://scenes/slot.tscn")
 
 @onready var item_grid: GridContainer = $MarginContainer/ItemGrid
 

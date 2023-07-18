@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dqsbl7tgk72wx"]
+
+[ext_resource type="Script" path="res://assets/item/item_data.gd" id="1_tyeas"]
+[ext_resource type="Texture2D" uid="uid://fnp3h0nj6qif" path="res://assets/item/#1 - Transparent Icons.png" id="2_5ax5e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l5hj"]
+atlas = ExtResource("2_5ax5e")
+region = Rect2(32, 416, 32, 32)
+
+[resource]
+script = ExtResource("1_tyeas")
+name = "Red Book"
+description = "Science Book"
+stackable = false
+texture = SubResource("AtlasTexture_6l5hj")

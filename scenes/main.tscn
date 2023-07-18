@@ -1,0 +1,189 @@
+[gd_scene load_steps=28 format=3 uid="uid://cjlw3ibaxa7l6"]
+
+[ext_resource type="PackedScene" uid="uid://dlbw5x5kr4xjm" path="res://scenes/player.tscn" id="1_lvtj5"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_wkut7"]
+[ext_resource type="PackedScene" uid="uid://72omrt7y2gkq" path="res://inventory/inventory.tscn" id="2_ftv5k"]
+[ext_resource type="Script" path="res://inventory/inventory_interface.gd" id="3_d12va"]
+[ext_resource type="PackedScene" uid="uid://cxlsoa8b3tm34" path="res://scenes/slot.tscn" id="5_c6phm"]
+[ext_resource type="PackedScene" uid="uid://syi3bdr5jxsm" path="res://scenes/chest.tscn" id="6_108t1"]
+[ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://scenes/red_apple.tscn" id="7_wliex"]
+[ext_resource type="Resource" uid="uid://2b8hpl83orj6" path="res://assets/item/items/blue_book.tres" id="8_ixq20"]
+[ext_resource type="Script" path="res://inventory/slot_data.gd" id="9_ecuj1"]
+[ext_resource type="Resource" uid="uid://bhqx5du1pf4s0" path="res://assets/item/items/apple.tres" id="10_o4lmg"]
+[ext_resource type="Resource" uid="uid://dqsbl7tgk72wx" path="res://assets/item/items/red_book.tres" id="10_ybwvl"]
+[ext_resource type="Script" path="res://scripts/Count.gd" id="11_5jsie"]
+[ext_resource type="Script" path="res://scripts/Progress_Bar.gd" id="11_nqofw"]
+[ext_resource type="PackedScene" uid="uid://drv6b6ymnuyie" path="res://scenes/red_book.tscn" id="12_2ccjm"]
+[ext_resource type="PackedScene" uid="uid://dw1hju54jpa02" path="res://scenes/Enemy.tscn" id="12_2027q"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="13_yxj8l"]
+[ext_resource type="PackedScene" uid="uid://1ohdblu8rjg0" path="res://scenes/blue_book.tscn" id="14_0gjf2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12ay"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_yo8h1"]
+sky_material = SubResource("ProceduralSkyMaterial_x12ay")
+
+[sub_resource type="Environment" id="Environment_ksurq"]
+background_mode = 2
+sky = SubResource("Sky_yo8h1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_30men"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fu5f"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="Resource" id="Resource_1kktk"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_o4lmg")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_mhiki"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_o4lmg")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_kpc80"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_ybwvl")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_7pb57"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("8_ixq20")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_rm0cl"]
+script = ExtResource("9_ecuj1")
+item_data = ExtResource("10_ybwvl")
+quantity = 1
+
+[node name="main" type="Node"]
+script = ExtResource("1_wkut7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ksurq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 16.7987, -10.0402)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50427, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_30men")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_3fu5f")
+
+[node name="Player" parent="." instance=ExtResource("1_lvtj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515994, 0)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_d12va")
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" groups=["playerInv"] instance=ExtResource("2_ftv5k")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("5_c6phm")]
+modulate = Color(1, 1, 1, 0.509804)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -585.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 398.0
+offset_bottom = 57.0
+script = ExtResource("11_nqofw")
+
+[node name="Label" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.811632
+anchor_top = 0.0123457
+anchor_right = 0.898438
+anchor_bottom = 0.0771605
+theme_override_font_sizes/font_size = 28
+text = "Items ="
+metadata/_edit_use_anchors_ = true
+
+[node name="Count" type="Label" parent="UI/HUD" groups=["CountItems"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.909722
+anchor_top = 0.0185185
+anchor_right = 0.934028
+anchor_bottom = 0.0771605
+theme_override_font_sizes/font_size = 25
+text = "Q"
+script = ExtResource("11_5jsie")
+metadata/_edit_use_anchors_ = true
+
+[node name="Chest" parent="." instance=ExtResource("6_108t1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)
+
+[node name="Redapple" parent="." instance=ExtResource("7_wliex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 2.59508)
+slot_data = SubResource("Resource_1kktk")
+
+[node name="Redapple2" parent="." instance=ExtResource("7_wliex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 8.69105)
+slot_data = SubResource("Resource_1kktk")
+
+[node name="Redapple3" parent="." instance=ExtResource("7_wliex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.400129, 5)
+slot_data = SubResource("Resource_mhiki")
+
+[node name="Redbook" parent="." instance=ExtResource("12_2ccjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34939, 5.21625)
+slot_data = SubResource("Resource_kpc80")
+
+[node name="Redbook2" parent="." instance=ExtResource("12_2ccjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43137, 0.34939, 5.21625)
+slot_data = SubResource("Resource_kpc80")
+
+[node name="Bluebook" parent="." instance=ExtResource("14_0gjf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90864, 0.60321, -2.37852)
+slot_data = SubResource("Resource_7pb57")
+
+[node name="Bluebook2" parent="." instance=ExtResource("14_0gjf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51379, 0.421931, 10.4289)
+slot_data = SubResource("Resource_7pb57")
+
+[node name="Redbook3" parent="." instance=ExtResource("12_2ccjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.456818, 11.2947)
+slot_data = SubResource("Resource_rm0cl")
+
+[node name="Enemy" parent="." groups=["Enemy"] instance=ExtResource("12_2027q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96294, 1.01996, -5.62144)
+script = ExtResource("13_yxj8l")

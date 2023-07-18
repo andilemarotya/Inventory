@@ -20,12 +20,6 @@ func _ready():
 	
 	enemy = get_tree().get_first_node_in_group("Enemy")
 	enemy.applyDamage.connect(player_health_down)
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _on_inventory_item_count_updated(count: int):
 	item_count = count
