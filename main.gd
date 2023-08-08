@@ -1,6 +1,7 @@
 extends Node
 
-@onready var player: CharacterBody3D = $Player
+@onready var player = $GameObjects/Player
+
 @onready var inventory_interface: Control = $UI/InventoryInterface
 @onready var hud = $HUD
 

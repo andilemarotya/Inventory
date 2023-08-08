@@ -1,22 +1,30 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjlw3ibaxa7l6"]
+[gd_scene load_steps=38 format=3 uid="uid://cjlw3ibaxa7l6"]
 
 [ext_resource type="PackedScene" uid="uid://dlbw5x5kr4xjm" path="res://player.tscn" id="1_lvtj5"]
 [ext_resource type="Script" path="res://main.gd" id="1_wkut7"]
 [ext_resource type="PackedScene" uid="uid://72omrt7y2gkq" path="res://inventory/inventory.tscn" id="2_ftv5k"]
 [ext_resource type="Script" path="res://inventory/inventory_interface.gd" id="3_d12va"]
 [ext_resource type="PackedScene" uid="uid://cxlsoa8b3tm34" path="res://slot.tscn" id="5_c6phm"]
-[ext_resource type="PackedScene" uid="uid://syi3bdr5jxsm" path="res://interactable/chest.tscn" id="6_108t1"]
-[ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://pick_up/red_apple.tscn" id="7_wliex"]
+[ext_resource type="PackedScene" uid="uid://syi3bdr5jxsm" path="res://scenes/chest.tscn" id="6_108t1"]
+[ext_resource type="Texture2D" uid="uid://ba072au6wp7im" path="res://assets/textures/coast_sand_rocks_02_diff_4k.png" id="7_anua3"]
+[ext_resource type="PackedScene" uid="uid://bbbhd7lh3kdl7" path="res://scenes/red_apple.tscn" id="7_wliex"]
+[ext_resource type="Texture2D" uid="uid://dy0yhsn7a0v6w" path="res://assets/textures/coast_sand_rocks_02_nor_gl_4k.png" id="8_bjnw8"]
 [ext_resource type="Resource" uid="uid://2b8hpl83orj6" path="res://item/items/blue_book.tres" id="8_ixq20"]
+[ext_resource type="Texture2D" uid="uid://dkvmk5c2eohk3" path="res://assets/textures/coast_sand_rocks_02_rough_4k.png" id="9_5ry0n"]
 [ext_resource type="Script" path="res://inventory/slot_data.gd" id="9_ecuj1"]
 [ext_resource type="Resource" uid="uid://bhqx5du1pf4s0" path="res://item/items/apple.tres" id="10_o4lmg"]
 [ext_resource type="Resource" uid="uid://dqsbl7tgk72wx" path="res://item/items/red_book.tres" id="10_ybwvl"]
 [ext_resource type="Script" path="res://scripts/Count.gd" id="11_5jsie"]
 [ext_resource type="Script" path="res://scripts/Progress_Bar.gd" id="11_nqofw"]
-[ext_resource type="PackedScene" uid="uid://drv6b6ymnuyie" path="res://pick_up/red_book.tscn" id="12_2ccjm"]
+[ext_resource type="PackedScene" uid="uid://drv6b6ymnuyie" path="res://scenes/red_book.tscn" id="12_2ccjm"]
 [ext_resource type="PackedScene" uid="uid://dw1hju54jpa02" path="res://scenes/Enemy.tscn" id="12_2027q"]
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="13_yxj8l"]
-[ext_resource type="PackedScene" uid="uid://1ohdblu8rjg0" path="res://pick_up/blue_book.tscn" id="14_0gjf2"]
+[ext_resource type="PackedScene" uid="uid://1ohdblu8rjg0" path="res://scenes/blue_book.tscn" id="14_0gjf2"]
+[ext_resource type="PackedScene" uid="uid://dioljhvyh0nsa" path="res://assets/WorldAssets/guarri02colour2.glb" id="14_l1a7v"]
+[ext_resource type="PackedScene" uid="uid://ctvqqmvbohnrx" path="res://assets/WorldAssets/Schotiaexport02.glb" id="15_0j58o"]
+[ext_resource type="PackedScene" uid="uid://5ddkfsamh8dn" path="res://assets/WorldAssets/Schotia02newgame1.glb" id="16_1ykde"]
+[ext_resource type="PackedScene" uid="uid://c0ymh4g6mymtn" path="res://assets/WorldAssets/final house01.glb" id="24_vu5lj"]
+[ext_resource type="PackedScene" uid="uid://c51c5gsq7dcv" path="res://assets/WorldAssets/housebiggerc3.glb" id="25_wg2mr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12ay"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,8 +39,15 @@ sky = SubResource("Sky_yo8h1")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vbl4"]
+albedo_texture = ExtResource("7_anua3")
+roughness_texture = ExtResource("9_5ry0n")
+normal_enabled = true
+normal_texture = ExtResource("8_bjnw8")
+
 [sub_resource type="BoxMesh" id="BoxMesh_30men"]
-size = Vector3(200, 1, 200)
+material = SubResource("StandardMaterial3D_7vbl4")
+size = Vector3(400, 1, 400)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3fu5f"]
 size = Vector3(200, 1, 200)
@@ -62,6 +77,8 @@ script = ExtResource("9_ecuj1")
 item_data = ExtResource("10_ybwvl")
 quantity = 1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_i2uvq"]
+
 [node name="main" type="Node"]
 script = ExtResource("1_wkut7")
 
@@ -71,18 +88,6 @@ environment = SubResource("Environment_ksurq")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 16.7987, -10.0402)
 shadow_enabled = true
-
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50427, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_30men")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_3fu5f")
-
-[node name="Player" parent="." instance=ExtResource("1_lvtj5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515994, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -149,41 +154,219 @@ text = "Q"
 script = ExtResource("11_5jsie")
 metadata/_edit_use_anchors_ = true
 
-[node name="Chest" parent="." instance=ExtResource("6_108t1")]
+[node name="GameObjects" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="GameObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50427, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameObjects/Floor"]
+mesh = SubResource("BoxMesh_30men")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameObjects/Floor"]
+shape = SubResource("BoxShape3D_3fu5f")
+
+[node name="Player" parent="GameObjects" instance=ExtResource("1_lvtj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515994, 0)
+
+[node name="Chest" parent="GameObjects" instance=ExtResource("6_108t1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29408, 0, 0)
 
-[node name="Redapple" parent="." instance=ExtResource("7_wliex")]
+[node name="Enemy" parent="GameObjects" groups=["Enemy"] instance=ExtResource("12_2027q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96294, 1.01996, -5.62144)
+script = ExtResource("13_yxj8l")
+
+[node name="Trees" type="Node3D" parent="GameObjects"]
+
+[node name="guarri02colour2" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41306, 0.39295, 67.0981)
+
+[node name="Schotiaexport02" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7667, 1.04877, 51.0417)
+
+[node name="Schotia02newgame1" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2738, 0.825841, 50.3451)
+
+[node name="guarri02colour5" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.5385, 0.39295, -154.746)
+
+[node name="Schotiaexport05" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.1848, 1.04877, -170.802)
+
+[node name="Schotia02newgame4" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.6778, 0.825841, -171.499)
+
+[node name="guarri02colour7" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.5511, 0.39295, -154.746)
+
+[node name="Schotiaexport07" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.9048, 1.04877, -170.802)
+
+[node name="Schotia02newgame6" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.4118, 0.825841, -171.499)
+
+[node name="guarri02colour8" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.897, 0.39295, -118.256)
+
+[node name="Schotiaexport08" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.251, 1.04877, -134.312)
+
+[node name="Schotia02newgame7" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.758, 0.825841, -135.009)
+
+[node name="guarri02colour9" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.195, 0.39295, -156.347)
+
+[node name="Schotiaexport09" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 148.548, 1.04877, -172.403)
+
+[node name="Schotia02newgame8" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.055, 0.825841, -173.1)
+
+[node name="guarri02colour10" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.061, 0.39295, -156.347)
+
+[node name="Schotiaexport10" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.414, 1.04877, -172.403)
+
+[node name="Schotia02newgame9" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.921, 0.825841, -173.1)
+
+[node name="guarri02colour11" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.1528, 0.39295, -124.108)
+
+[node name="Schotiaexport11" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.7991, 1.04877, -140.164)
+
+[node name="Schotia02newgame10" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.2921, 0.825841, -140.861)
+
+[node name="guarri02colour12" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.076, 0.39295, -63.808)
+
+[node name="Schotiaexport12" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4295, 1.04877, -79.8644)
+
+[node name="Schotia02newgame11" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.9366, 0.825841, -80.5611)
+
+[node name="guarri02colour13" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.076, 0.39295, -29.0967)
+
+[node name="Schotiaexport13" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4295, 1.04877, -45.1531)
+
+[node name="Schotia02newgame12" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.9366, 0.825841, -45.8498)
+
+[node name="guarri02colour14" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.3163, 0.39295, -76.2307)
+
+[node name="Schotiaexport14" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6698, 1.04877, -92.2872)
+
+[node name="Schotia02newgame13" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.1769, 0.825841, -92.9838)
+
+[node name="guarri02colour6" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7597, 0.39295, -154.746)
+
+[node name="Schotiaexport06" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1133, 1.04877, -170.802)
+
+[node name="Schotia02newgame5" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6204, 0.825841, -171.499)
+
+[node name="guarri02colour3" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(-0.0701917, 0, 0.997534, 0, 1, 0, -0.997534, 0, -0.0701917, 118.845, 0.39295, 82.5812)
+
+[node name="Schotiaexport03" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(-0.0701917, 0, 0.997534, 0, 1, 0, -0.997534, 0, -0.0701917, 103.154, 1.04877, 88.3432)
+
+[node name="Schotia02newgame2" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(-0.0701917, 0, 0.997534, 0, 1, 0, -0.997534, 0, -0.0701917, 101.722, 0.825841, 77.9109)
+
+[node name="guarri02colour4" parent="GameObjects/Trees" instance=ExtResource("14_l1a7v")]
+transform = Transform3D(0.0145206, 0, -0.999895, 0, 1, 0, 0.999895, 0, 0.0145206, 123.673, 0.39295, 58.4021)
+
+[node name="Schotiaexport04" parent="GameObjects/Trees" instance=ExtResource("15_0j58o")]
+transform = Transform3D(0.0145206, 0, -0.999895, 0, 1, 0, 0.999895, 0, 0.0145206, 139.661, 1.04877, 53.5231)
+
+[node name="Schotia02newgame3" parent="GameObjects/Trees" instance=ExtResource("16_1ykde")]
+transform = Transform3D(0.0145206, 0, -0.999895, 0, 1, 0, 0.999895, 0, 0.0145206, 140.51, 0.825841, 64.019)
+
+[node name="Pickables" type="Node3D" parent="GameObjects"]
+
+[node name="Redapple" parent="GameObjects/Pickables" instance=ExtResource("7_wliex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 2.59508)
 slot_data = SubResource("Resource_1kktk")
 
-[node name="Redapple2" parent="." instance=ExtResource("7_wliex")]
+[node name="Redapple2" parent="GameObjects/Pickables" instance=ExtResource("7_wliex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05636, 0.502878, 8.69105)
 slot_data = SubResource("Resource_1kktk")
 
-[node name="Redapple3" parent="." instance=ExtResource("7_wliex")]
+[node name="Redapple3" parent="GameObjects/Pickables" instance=ExtResource("7_wliex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.400129, 5)
 slot_data = SubResource("Resource_mhiki")
 
-[node name="Redbook" parent="." instance=ExtResource("12_2ccjm")]
+[node name="Redbook" parent="GameObjects/Pickables" instance=ExtResource("12_2ccjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34939, 5.21625)
 slot_data = SubResource("Resource_kpc80")
 
-[node name="Redbook2" parent="." instance=ExtResource("12_2ccjm")]
+[node name="Redbook2" parent="GameObjects/Pickables" instance=ExtResource("12_2ccjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43137, 0.34939, 5.21625)
 slot_data = SubResource("Resource_kpc80")
 
-[node name="Bluebook" parent="." instance=ExtResource("14_0gjf2")]
+[node name="Bluebook" parent="GameObjects/Pickables" instance=ExtResource("14_0gjf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90864, 0.60321, -2.37852)
 slot_data = SubResource("Resource_7pb57")
 
-[node name="Bluebook2" parent="." instance=ExtResource("14_0gjf2")]
+[node name="Bluebook2" parent="GameObjects/Pickables" instance=ExtResource("14_0gjf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51379, 0.421931, 10.4289)
 slot_data = SubResource("Resource_7pb57")
 
-[node name="Redbook3" parent="." instance=ExtResource("12_2ccjm")]
+[node name="Redbook3" parent="GameObjects/Pickables" instance=ExtResource("12_2ccjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.456818, 11.2947)
 slot_data = SubResource("Resource_rm0cl")
 
-[node name="Enemy" parent="." groups=["Enemy"] instance=ExtResource("12_2027q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96294, 1.01996, -5.62144)
-script = ExtResource("13_yxj8l")
+[node name="Houses" type="Node3D" parent="GameObjects"]
+
+[node name="House1" type="StaticBody3D" parent="GameObjects/Houses"]
+
+[node name="final house01" parent="GameObjects/Houses/House1" instance=ExtResource("24_vu5lj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.3646, -0.00427002, 68.8112)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameObjects/Houses/House1"]
+shape = SubResource("BoxShape3D_i2uvq")
+
+[node name="housebiggerc3" parent="GameObjects/Houses" instance=ExtResource("25_wg2mr")]
+transform = Transform3D(-0.0967144, 0, -0.995312, 0, 1, 0, 0.995312, 0, -0.0967144, -116.623, -0.00427002, -0.00595093)
+
+[node name="housebiggerc4" parent="GameObjects/Houses" instance=ExtResource("25_wg2mr")]
+transform = Transform3D(-0.961603, 0, -0.274446, 0, 1, 0, 0.274446, 0, -0.961603, -16.2597, -0.00427002, -159.877)
+
+[node name="housebiggerc5" parent="GameObjects/Houses" instance=ExtResource("25_wg2mr")]
+transform = Transform3D(-0.995351, 0, -0.0963148, 0, 1, 0, 0.0963148, 0, -0.995351, 51.7696, -0.00427002, -161.441)
+
+[node name="House2" type="StaticBody3D" parent="GameObjects/Houses"]
+
+[node name="final house01" parent="GameObjects/Houses/House2" instance=ExtResource("24_vu5lj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0121, -0.00427002, 68.8112)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameObjects/Houses/House2"]
+shape = SubResource("BoxShape3D_i2uvq")
+
+[node name="House3" type="StaticBody3D" parent="GameObjects/Houses"]
+
+[node name="final house01" parent="GameObjects/Houses/House3" instance=ExtResource("24_vu5lj")]
+transform = Transform3D(0.0882858, 0, 0.996095, 0, 1, 0, -0.996095, 0, 0.0882858, 149.64, -0.00427002, -107.909)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameObjects/Houses/House3"]
+shape = SubResource("BoxShape3D_i2uvq")
+
+[node name="House4" type="StaticBody3D" parent="GameObjects/Houses"]
+
+[node name="final house01" parent="GameObjects/Houses/House4" instance=ExtResource("24_vu5lj")]
+transform = Transform3D(0.0882858, 0, 0.996095, 0, 1, 0, -0.996095, 0, 0.0882858, 149.64, -0.00427002, -51.7199)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameObjects/Houses/House4"]
+shape = SubResource("BoxShape3D_i2uvq")
